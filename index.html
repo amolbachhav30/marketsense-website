@@ -21,50 +21,30 @@
 
     <style>
         :root {
-            /* Brand Colors - Matching App Theme */
-            --primary: #6366F1;           /* Indigo 500 */
-            --primary-light: #818CF8;     /* Indigo 400 */
-            --primary-dark: #4F46E5;      /* Indigo 600 */
-
-            /* Semantic Colors */
-            --accent-green: #10B981;      /* Emerald 500 - gains */
-            --accent-red: #EF4444;        /* Red 500 - losses */
-            --accent-blue: #3B82F6;       /* Blue 500 */
-            --accent-violet: #8B5CF6;     /* Violet - ML */
-            --accent-cyan: #06B6D4;       /* Cyan - News */
-
-            /* Surface Colors - Dark Mode */
+            --primary: #6366F1;
+            --primary-light: #818CF8;
+            --primary-dark: #4F46E5;
+            --accent-green: #10B981;
+            --accent-red: #EF4444;
+            --accent-violet: #8B5CF6;
+            --accent-cyan: #06B6D4;
+            --accent-amber: #F59E0B;
             --bg-primary: #09090B;
             --bg-card: #111113;
             --bg-elevated: #18181B;
             --bg-surface: #27272A;
             --divider: #3F3F46;
-
-            /* Text Colors */
             --text-primary: #FAFAFA;
             --text-secondary: #A1A1AA;
             --text-tertiary: #71717A;
-            --text-disabled: #52525B;
-
-            /* Glass Effects */
-            --glass-bg: rgba(17, 17, 19, 0.8);
             --glass-border: rgba(255, 255, 255, 0.08);
             --glass-highlight: rgba(255, 255, 255, 0.12);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
@@ -72,42 +52,17 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Container */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-        /* Glass Card Effect - Matching App */
         .glass-card {
             background: var(--bg-card);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             position: relative;
-            overflow: hidden;
         }
 
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, var(--glass-highlight) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        /* Animated Background */
         .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -1;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -1;
             background:
                 radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
                 radial-gradient(ellipse 60% 40% at 100% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
@@ -116,878 +71,190 @@
 
         /* Navigation */
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             padding: 16px 24px;
-            background: rgba(9, 9, 11, 0.85);
+            background: rgba(9, 9, 11, 0.9);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--glass-border);
         }
+        .nav-content { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-primary); }
+        .logo-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+        .logo-brand { font-weight: 700; font-size: 1.1rem; }
+        .logo-company { font-size: 0.7rem; color: var(--text-tertiary); font-weight: 500; }
+        .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: color 0.2s ease; }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-cta { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 10px 20px; border-radius: 10px; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: all 0.2s ease; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); }
+        .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4); }
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; }
 
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+        /* Hero */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 24px 80px; }
+        .hero-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-text { max-width: 560px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-card); border: 1px solid var(--glass-border); padding: 8px 16px; border-radius: 100px; font-size: 0.8rem; font-weight: 500; color: var(--text-secondary); margin-bottom: 24px; }
+        .hero-badge .dot { width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(1.2); } }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.02em; }
+        .hero h1 .gradient { background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-green) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-subtitle { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 32px; line-height: 1.7; }
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--text-primary);
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-
-        .logo-brand {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .logo-company {
-            font-size: 0.7rem;
-            color: var(--text-tertiary);
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 32px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-cta {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-        }
-
-        .nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 120px 24px 80px;
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .hero-text {
-            max-width: 560px;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: var(--bg-card);
-            border: 1px solid var(--glass-border);
-            padding: 8px 16px;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 24px;
-        }
-
-        .hero-badge .dot {
-            width: 8px;
-            height: 8px;
-            background: var(--accent-green);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.2); }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            letter-spacing: -0.02em;
-        }
-
-        .hero h1 .gradient {
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-green) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-            line-height: 1.7;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.45);
-        }
-
-        .btn-secondary {
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 1px solid var(--glass-border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-elevated);
-            border-color: var(--divider);
-        }
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; border-radius: 12px; font-weight: 600; font-size: 1rem; text-decoration: none; transition: all 0.2s ease; border: none; cursor: pointer; }
+        .btn-primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(99, 102, 241, 0.45); }
+        .btn-secondary { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--glass-border); }
+        .btn-secondary:hover { background: var(--bg-elevated); border-color: var(--divider); }
 
         /* Phone Mockup */
-        .hero-visual {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        .hero-visual { display: flex; justify-content: center; align-items: center; }
+        .phone-mockup { width: 280px; height: 570px; background: linear-gradient(145deg, #1a1a2e 0%, var(--bg-primary) 100%); border-radius: 40px; padding: 10px; box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 50px 100px rgba(0,0,0,0.5); }
+        .phone-screen { width: 100%; height: 100%; background: var(--bg-primary); border-radius: 32px; overflow: hidden; position: relative; }
+        .phone-notch { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 100px; height: 28px; background: #000; border-radius: 14px; z-index: 10; }
+        .phone-content { padding: 48px 16px 16px; height: 100%; display: flex; flex-direction: column; gap: 12px; }
+        .phone-header { margin-bottom: 8px; }
+        .phone-header h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 2px; }
+        .phone-header p { font-size: 0.7rem; color: var(--text-tertiary); }
+        .stock-card { background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 16px; padding: 14px; }
+        .stock-card.positive { border-color: rgba(16, 185, 129, 0.3); }
+        .stock-card.featured { border-color: rgba(99, 102, 241, 0.3); }
+        .stock-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .stock-name h4 { font-size: 1rem; font-weight: 600; }
+        .stock-name span { font-size: 0.65rem; color: var(--text-tertiary); }
+        .stock-price { text-align: right; }
+        .stock-price .price { font-size: 1.1rem; font-weight: 700; }
+        .stock-price .change { font-size: 0.7rem; color: var(--accent-green); font-weight: 600; }
+        .mini-chart { height: 40px; display: flex; align-items: flex-end; gap: 2px; margin-bottom: 10px; }
+        .mini-chart .bar { flex: 1; background: var(--accent-green); border-radius: 2px; opacity: 0.6; }
+        .mini-chart.indigo .bar { background: var(--primary); }
+        .signal-badge { display: flex; justify-content: space-between; align-items: center; background: var(--bg-surface); border-radius: 8px; padding: 8px 12px; font-size: 0.7rem; }
+        .signal-badge span:first-child { color: var(--text-tertiary); }
+        .signal-badge .value { font-weight: 600; color: var(--accent-green); }
+        .signal-badge .value.ml { color: var(--accent-violet); }
 
-        .phone-mockup {
-            width: 280px;
-            height: 570px;
-            background: linear-gradient(145deg, #1a1a2e 0%, var(--bg-primary) 100%);
-            border-radius: 40px;
-            padding: 10px;
-            box-shadow:
-                0 0 0 2px rgba(255,255,255,0.1),
-                0 50px 100px rgba(0,0,0,0.5);
-            position: relative;
-        }
+        /* Sections */
+        .section { padding: 100px 24px; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-label { display: inline-block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--primary); margin-bottom: 12px; }
+        .section-title { font-size: clamp(2rem, 4vw, 2.75rem); font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em; }
+        .section-subtitle { font-size: 1rem; color: var(--text-secondary); max-width: 500px; margin: 0 auto; }
 
-        .phone-screen {
-            width: 100%;
-            height: 100%;
-            background: var(--bg-primary);
-            border-radius: 32px;
-            overflow: hidden;
-            position: relative;
-        }
+        /* Features */
+        .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+        .feature-card { padding: 24px; transition: transform 0.3s ease, border-color 0.3s ease; }
+        .feature-card:hover { transform: translateY(-4px); border-color: var(--primary); }
+        .feature-icon { width: 48px; height: 48px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 16px; }
+        .feature-icon.green { background: linear-gradient(135deg, var(--accent-green) 0%, #34D399 100%); }
+        .feature-icon.violet { background: linear-gradient(135deg, var(--accent-violet) 0%, #A78BFA 100%); }
+        .feature-icon.cyan { background: linear-gradient(135deg, var(--accent-cyan) 0%, #22D3EE 100%); }
+        .feature-icon.amber { background: linear-gradient(135deg, var(--accent-amber) 0%, #FBBF24 100%); }
+        .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+        .feature-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
 
-        .phone-notch {
-            position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 28px;
-            background: #000;
-            border-radius: 14px;
-            z-index: 10;
-        }
+        /* Stats */
+        .stats { padding: 60px 24px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 900px; margin: 0 auto; text-align: center; }
+        .stat-item h3 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-green) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 4px; }
+        .stat-item p { font-size: 0.85rem; color: var(--text-tertiary); }
 
-        .phone-content {
-            padding: 48px 16px 16px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .phone-header {
-            margin-bottom: 8px;
-        }
-
-        .phone-header h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 2px;
-        }
-
-        .phone-header p {
-            font-size: 0.7rem;
-            color: var(--text-tertiary);
-        }
-
-        .stock-card {
-            background: var(--bg-card);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 14px;
-            position: relative;
-        }
-
-        .stock-card.positive {
-            border-color: rgba(16, 185, 129, 0.3);
-        }
-
-        .stock-card.featured {
-            border-color: rgba(99, 102, 241, 0.3);
-        }
-
-        .stock-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-
-        .stock-name h4 {
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .stock-name span {
-            font-size: 0.65rem;
-            color: var(--text-tertiary);
-        }
-
-        .stock-price {
-            text-align: right;
-        }
-
-        .stock-price .price {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .stock-price .change {
-            font-size: 0.7rem;
-            color: var(--accent-green);
-            font-weight: 600;
-        }
-
-        .stock-price .change.negative {
-            color: var(--accent-red);
-        }
-
-        .mini-chart {
-            height: 40px;
-            display: flex;
-            align-items: flex-end;
-            gap: 2px;
-            margin-bottom: 10px;
-        }
-
-        .mini-chart .bar {
-            flex: 1;
-            background: var(--accent-green);
-            border-radius: 2px;
-            opacity: 0.6;
-        }
-
-        .mini-chart.indigo .bar {
-            background: var(--primary);
-        }
-
-        .signal-badge {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg-surface);
-            border-radius: 8px;
-            padding: 8px 12px;
-            font-size: 0.7rem;
-        }
-
-        .signal-badge span:first-child {
-            color: var(--text-tertiary);
-        }
-
-        .signal-badge .value {
-            font-weight: 600;
-            color: var(--accent-green);
-        }
-
-        .signal-badge .value.ml {
-            color: var(--accent-violet);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 24px;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-label {
-            display: inline-block;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--primary);
-            margin-bottom: 12px;
-        }
-
-        .section-title {
-            font-size: clamp(2rem, 4vw, 2.75rem);
-            font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
-        }
-
-        .section-subtitle {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            padding: 28px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
-        }
-
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.4rem;
-            margin-bottom: 16px;
-        }
-
-        .feature-icon.green {
-            background: linear-gradient(135deg, var(--accent-green) 0%, #34D399 100%);
-        }
-
-        .feature-icon.violet {
-            background: linear-gradient(135deg, var(--accent-violet) 0%, #A78BFA 100%);
-        }
-
-        .feature-icon.cyan {
-            background: linear-gradient(135deg, var(--accent-cyan) 0%, #22D3EE 100%);
-        }
-
-        .feature-card h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .feature-card p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Stats Section */
-        .stats {
-            padding: 60px 24px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .stat-item h3 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent-green) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 4px;
-        }
-
-        .stat-item p {
-            font-size: 0.85rem;
-            color: var(--text-tertiary);
-        }
-
-        /* How It Works */
-        .how-it-works {
-            padding: 100px 24px;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .step {
-            text-align: center;
-        }
-
-        .step-number {
-            width: 64px;
-            height: 64px;
-            background: var(--bg-card);
-            border: 2px solid var(--glass-border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 0 auto 20px;
-        }
-
-        .step h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .step p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
+        /* Steps */
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 900px; margin: 0 auto; }
+        .step { text-align: center; }
+        .step-number { width: 64px; height: 64px; background: var(--bg-card); border: 2px solid var(--glass-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: var(--primary); margin: 0 auto 20px; }
+        .step h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+        .step p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
 
         /* Pricing */
-        .pricing {
-            padding: 100px 24px;
-        }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto; }
+        .pricing-card { padding: 32px; text-align: center; position: relative; overflow: visible; }
+        .pricing-card.featured { border-color: var(--primary); transform: scale(1.02); }
+        .pricing-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 4px 16px; border-radius: 100px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+        .pricing-tier { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-tertiary); margin-bottom: 12px; }
+        .pricing-price { font-size: 2.5rem; font-weight: 800; margin-bottom: 4px; }
+        .pricing-price span { font-size: 0.9rem; font-weight: 400; color: var(--text-tertiary); }
+        .pricing-desc { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 24px; }
+        .pricing-features { list-style: none; text-align: left; margin-bottom: 24px; }
+        .pricing-features li { padding: 10px 0; border-bottom: 1px solid var(--glass-border); font-size: 0.85rem; display: flex; align-items: center; gap: 10px; }
+        .pricing-features li::before { content: '✓'; color: var(--accent-green); font-weight: 600; }
+        .pricing-btn { width: 100%; padding: 12px 24px; border-radius: 10px; font-weight: 600; font-size: 0.9rem; text-decoration: none; display: block; text-align: center; transition: all 0.2s ease; cursor: pointer; border: none; }
+        .pricing-btn.primary { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; }
+        .pricing-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4); }
+        .pricing-btn.secondary { background: var(--bg-surface); color: var(--text-primary); border: 1px solid var(--glass-border); }
+        .pricing-btn.secondary:hover { background: var(--bg-elevated); }
 
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+        /* CTA */
+        .cta-card { max-width: 700px; margin: 0 auto; padding: 60px 40px; text-align: center; border-color: var(--primary); }
+        .cta-card h2 { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 800; margin-bottom: 16px; }
+        .cta-card p { font-size: 1rem; color: var(--text-secondary); margin-bottom: 32px; }
 
-        .pricing-card {
-            padding: 32px;
-            text-align: center;
-            position: relative;
-        }
-
-        .pricing-card.featured {
-            border-color: var(--primary);
-            transform: scale(1.02);
-        }
-
-        .pricing-card.featured::before {
-            content: 'Popular';
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            padding: 4px 16px;
-            border-radius: 100px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .pricing-tier {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-tertiary);
-            margin-bottom: 12px;
-        }
-
-        .pricing-price {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-
-        .pricing-price span {
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: var(--text-tertiary);
-        }
-
-        .pricing-desc {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 24px;
-        }
-
-        .pricing-features {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 24px;
-        }
-
-        .pricing-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid var(--glass-border);
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .pricing-features li::before {
-            content: '✓';
-            color: var(--accent-green);
-            font-weight: 600;
-        }
-
-        .pricing-btn {
-            width: 100%;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            text-decoration: none;
-            display: block;
-            text-align: center;
-            transition: all 0.2s ease;
-        }
-
-        .pricing-btn.primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-        }
-
-        .pricing-btn.secondary {
-            background: var(--bg-surface);
-            color: var(--text-primary);
-            border: 1px solid var(--glass-border);
-        }
-
-        /* CTA Section */
-        .cta {
-            padding: 100px 24px;
-        }
-
-        .cta-card {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 60px 40px;
-            text-align: center;
-            border-color: var(--primary);
-        }
-
-        .cta-card h2 {
-            font-size: clamp(1.75rem, 4vw, 2.25rem);
-            font-weight: 800;
-            margin-bottom: 16px;
-        }
-
-        .cta-card p {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-        }
+        /* About Section */
+        .about-content { max-width: 800px; margin: 0 auto; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 48px; }
+        .about-text h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 16px; color: var(--primary-light); }
+        .about-text p { font-size: 1rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px; }
+        .about-info { background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 16px; padding: 32px; }
+        .about-info h4 { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-tertiary); margin-bottom: 8px; }
+        .about-info p { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 20px; }
+        .about-info a { color: var(--primary-light); text-decoration: none; }
+        .about-info a:hover { text-decoration: underline; }
 
         /* Disclaimer */
-        .disclaimer {
-            max-width: 800px;
-            margin: 0 auto 60px;
-            padding: 20px 24px;
-            background: rgba(245, 158, 11, 0.08);
-            border: 1px solid rgba(245, 158, 11, 0.2);
-            border-radius: 12px;
-        }
+        .disclaimer { max-width: 800px; margin: 0 auto 60px; padding: 20px 24px; background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 12px; }
+        .disclaimer h4 { font-size: 0.8rem; font-weight: 600; color: #F59E0B; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+        .disclaimer p { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.6; }
 
-        .disclaimer h4 {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #F59E0B;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .disclaimer p {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
+        /* Legal Pages */
+        .legal-content { max-width: 800px; margin: 0 auto; padding: 120px 24px 80px; }
+        .legal-content h1 { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+        .legal-content .updated { font-size: 0.85rem; color: var(--text-tertiary); margin-bottom: 32px; }
+        .legal-content h2 { font-size: 1.25rem; font-weight: 700; margin: 32px 0 12px; color: var(--text-primary); }
+        .legal-content p, .legal-content li { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 12px; }
+        .legal-content ul { margin-left: 20px; margin-bottom: 16px; }
+        .legal-content a { color: var(--primary-light); }
 
         /* Footer */
-        footer {
-            padding: 60px 24px 40px;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 48px;
-            margin-bottom: 48px;
-        }
-
-        .footer-brand p {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-top: 16px;
-            line-height: 1.6;
-        }
-
-        .footer-links h4 {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-tertiary);
-            margin-bottom: 16px;
-        }
-
-        .footer-links a {
-            display: block;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            padding: 6px 0;
-            transition: color 0.2s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 32px;
-            border-top: 1px solid var(--glass-border);
-        }
-
-        .footer-bottom p {
-            font-size: 0.8rem;
-            color: var(--text-tertiary);
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 12px;
-        }
-
-        .footer-social a {
-            width: 36px;
-            height: 36px;
-            background: var(--bg-card);
-            border: 1px solid var(--glass-border);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-        }
-
-        .footer-social a:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        /* Mobile Menu Button */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
+        footer { padding: 60px 24px 40px; border-top: 1px solid var(--glass-border); }
+        .footer-content { max-width: 1200px; margin: 0 auto; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+        .footer-brand p { color: var(--text-secondary); font-size: 0.85rem; margin-top: 16px; line-height: 1.6; }
+        .footer-links h4 { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-tertiary); margin-bottom: 16px; }
+        .footer-links a { display: block; color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; padding: 6px 0; transition: color 0.2s ease; }
+        .footer-links a:hover { color: var(--text-primary); }
+        .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--glass-border); }
+        .footer-bottom p { font-size: 0.8rem; color: var(--text-tertiary); }
+        .footer-social { display: flex; gap: 12px; }
+        .footer-social a { width: 36px; height: 36px; background: var(--bg-card); border: 1px solid var(--glass-border); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: all 0.2s ease; }
+        .footer-social a:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 48px;
-            }
-
-            .hero-text {
-                max-width: 100%;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .features-grid,
-            .pricing-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .hero-content { grid-template-columns: 1fr; text-align: center; gap: 48px; }
+            .hero-text { max-width: 100%; }
+            .hero-buttons { justify-content: center; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .about-grid { grid-template-columns: 1fr; }
         }
-
         @media (max-width: 768px) {
-            .nav-links,
-            .nav-cta {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero {
-                padding: 100px 20px 60px;
-                min-height: auto;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .phone-mockup {
-                width: 240px;
-                height: 490px;
-            }
-
-            .features-grid,
-            .steps-grid,
-            .pricing-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-            }
-
-            .pricing-card.featured {
-                transform: none;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 16px;
-                text-align: center;
-            }
-
-            .cta-card {
-                padding: 40px 24px;
-            }
+            .nav-links, .nav-cta { display: none; }
+            .mobile-menu-btn { display: block; }
+            .hero { padding: 100px 20px 60px; min-height: auto; }
+            .hero h1 { font-size: 2rem; }
+            .phone-mockup { width: 240px; height: 490px; }
+            .features-grid, .steps-grid, .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+            .pricing-card.featured { transform: none; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+            .cta-card { padding: 40px 24px; }
         }
 
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: all 0.6s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .fade-in { opacity: 0; transform: translateY(24px); transition: all 0.6s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
@@ -996,7 +263,7 @@
     <!-- Navigation -->
     <nav>
         <div class="nav-content">
-            <a href="#" class="logo">
+            <a href="#" class="logo" onclick="showPage('home')">
                 <div class="logo-icon">📈</div>
                 <div class="logo-text">
                     <span class="logo-brand">MarketSense</span>
@@ -1007,275 +274,350 @@
                 <li><a href="#features">Features</a></li>
                 <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#about">About</a></li>
             </ul>
             <a href="#download" class="nav-cta">Download App</a>
             <button class="mobile-menu-btn">☰</button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-text fade-in">
-                <div class="hero-badge">
-                    <span class="dot"></span>
-                    Now Available on iOS
+    <!-- Main Content -->
+    <main id="home-page">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text fade-in">
+                    <div class="hero-badge">
+                        <span class="dot"></span>
+                        Now Available on iOS
+                    </div>
+                    <h1>Understand Markets with <span class="gradient">Machine Learning</span></h1>
+                    <p class="hero-subtitle">
+                        ML-powered stock predictions, technical analysis, and sentiment scores — explained in plain English. Make smarter investment decisions with AI-driven insights.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#download" class="btn btn-primary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
+                            Download for iOS
+                        </a>
+                        <a href="#features" class="btn btn-secondary">Learn More</a>
+                    </div>
                 </div>
-                <h1>Understand Markets with <span class="gradient">Machine Learning</span></h1>
-                <p class="hero-subtitle">
-                    ML-powered stock predictions, technical analysis, and sentiment scores — explained in plain English. Make smarter investment decisions with AI-driven insights.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#download" class="btn btn-primary">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
-                        </svg>
-                        Download for iOS
-                    </a>
-                    <a href="#features" class="btn btn-secondary">Learn More</a>
-                </div>
-            </div>
-
-            <div class="hero-visual fade-in">
-                <div class="phone-mockup">
-                    <div class="phone-screen">
-                        <div class="phone-notch"></div>
-                        <div class="phone-content">
-                            <div class="phone-header">
-                                <h3>Market</h3>
-                                <p>Good Morning</p>
-                            </div>
-
-                            <div class="stock-card positive">
-                                <div class="stock-row">
-                                    <div class="stock-name">
-                                        <h4>AAPL</h4>
-                                        <span>Apple Inc.</span>
+                <div class="hero-visual fade-in">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <div class="phone-notch"></div>
+                            <div class="phone-content">
+                                <div class="phone-header">
+                                    <h3>Market</h3>
+                                    <p>Good Morning</p>
+                                </div>
+                                <div class="stock-card positive">
+                                    <div class="stock-row">
+                                        <div class="stock-name"><h4>AAPL</h4><span>Apple Inc.</span></div>
+                                        <div class="stock-price"><div class="price">$189.84</div><div class="change">+2.34%</div></div>
                                     </div>
-                                    <div class="stock-price">
-                                        <div class="price">$189.84</div>
-                                        <div class="change">+2.34%</div>
+                                    <div class="mini-chart">
+                                        <div class="bar" style="height:35%"></div><div class="bar" style="height:50%"></div><div class="bar" style="height:42%"></div><div class="bar" style="height:65%"></div><div class="bar" style="height:58%"></div><div class="bar" style="height:75%"></div><div class="bar" style="height:70%"></div><div class="bar" style="height:85%"></div>
                                     </div>
+                                    <div class="signal-badge"><span>ML Prediction</span><span class="value">↑ 78% Bullish</span></div>
                                 </div>
-                                <div class="mini-chart">
-                                    <div class="bar" style="height: 35%"></div>
-                                    <div class="bar" style="height: 50%"></div>
-                                    <div class="bar" style="height: 42%"></div>
-                                    <div class="bar" style="height: 65%"></div>
-                                    <div class="bar" style="height: 58%"></div>
-                                    <div class="bar" style="height: 75%"></div>
-                                    <div class="bar" style="height: 70%"></div>
-                                    <div class="bar" style="height: 85%"></div>
-                                </div>
-                                <div class="signal-badge">
-                                    <span>ML Prediction</span>
-                                    <span class="value">↑ 78% Bullish</span>
-                                </div>
-                            </div>
-
-                            <div class="stock-card featured">
-                                <div class="stock-row">
-                                    <div class="stock-name">
-                                        <h4>NVDA</h4>
-                                        <span>NVIDIA Corp.</span>
+                                <div class="stock-card featured">
+                                    <div class="stock-row">
+                                        <div class="stock-name"><h4>NVDA</h4><span>NVIDIA Corp.</span></div>
+                                        <div class="stock-price"><div class="price">$875.28</div><div class="change">+4.12%</div></div>
                                     </div>
-                                    <div class="stock-price">
-                                        <div class="price">$875.28</div>
-                                        <div class="change">+4.12%</div>
+                                    <div class="mini-chart indigo">
+                                        <div class="bar" style="height:40%"></div><div class="bar" style="height:55%"></div><div class="bar" style="height:48%"></div><div class="bar" style="height:70%"></div><div class="bar" style="height:80%"></div><div class="bar" style="height:75%"></div><div class="bar" style="height:90%"></div><div class="bar" style="height:95%"></div>
                                     </div>
-                                </div>
-                                <div class="mini-chart indigo">
-                                    <div class="bar" style="height: 40%"></div>
-                                    <div class="bar" style="height: 55%"></div>
-                                    <div class="bar" style="height: 48%"></div>
-                                    <div class="bar" style="height: 70%"></div>
-                                    <div class="bar" style="height: 80%"></div>
-                                    <div class="bar" style="height: 75%"></div>
-                                    <div class="bar" style="height: 90%"></div>
-                                    <div class="bar" style="height: 95%"></div>
-                                </div>
-                                <div class="signal-badge">
-                                    <span>Sentiment</span>
-                                    <span class="value ml">Very Positive</span>
+                                    <div class="signal-badge"><span>Sentiment</span><span class="value ml">Very Positive</span></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
+        <!-- Features -->
+        <section class="section" id="features">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <span class="section-label">Features</span>
+                    <h2 class="section-title">Powered by Machine Learning</h2>
+                    <p class="section-subtitle">Advanced AI algorithms analyze market patterns to give you insights that matter</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card glass-card fade-in">
+                        <div class="feature-icon">🤖</div>
+                        <h3>ML Predictions</h3>
+                        <p>Probabilistic forecasts using XGBoost, LightGBM, and Ridge ensemble models.</p>
+                    </div>
+                    <div class="feature-card glass-card fade-in">
+                        <div class="feature-icon green">📰</div>
+                        <h3>News Sentiment</h3>
+                        <p>Real-time aggregation from financial outlets with sentiment scoring.</p>
+                    </div>
+                    <div class="feature-card glass-card fade-in">
+                        <div class="feature-icon violet">📊</div>
+                        <h3>Technical Analysis</h3>
+                        <p>RSI, MACD, Bollinger Bands explained in plain English.</p>
+                    </div>
+                    <div class="feature-card glass-card fade-in">
+                        <div class="feature-icon cyan">⚡</div>
+                        <h3>Real-Time Updates</h3>
+                        <p>Live prices during market hours with interactive charts.</p>
+                    </div>
+                    <div class="feature-card glass-card fade-in">
+                        <div class="feature-icon amber">🎯</div>
+                        <h3>Confidence Scores</h3>
+                        <p>Every prediction includes intervals and model consensus.</p>
+                    </div>
+                    <div class="feature-card glass-card fade-in">
+                        <div class="feature-icon">📱</div>
+                        <h3>Swipe Cards</h3>
+                        <p>Navigate stocks effortlessly with intuitive card gestures.</p>
+                    </div>
+                    <div class="feature-card glass-card fade-in">
+                        <div class="feature-icon green">🔔</div>
+                        <h3>Smart Alerts</h3>
+                        <p>Get notified on significant price moves and prediction changes.</p>
+                    </div>
+                    <div class="feature-card glass-card fade-in">
+                        <div class="feature-icon violet">🌙</div>
+                        <h3>Dark Mode</h3>
+                        <p>Beautiful dark interface designed for comfortable viewing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid fade-in">
+                    <div class="stat-item"><h3>5+</h3><p>ML Models</p></div>
+                    <div class="stat-item"><h3>24/7</h3><p>Analysis</p></div>
+                    <div class="stat-item"><h3>1000+</h3><p>Stocks</p></div>
+                    <div class="stat-item"><h3>Real-time</h3><p>Updates</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="section" id="how-it-works">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <span class="section-label">How It Works</span>
+                    <h2 class="section-title">Three Simple Steps</h2>
+                    <p class="section-subtitle">Get started with AI-powered market insights in minutes</p>
+                </div>
+                <div class="steps-grid">
+                    <div class="step fade-in"><div class="step-number">1</div><h3>Download the App</h3><p>Get MarketSense from the App Store and create your free account.</p></div>
+                    <div class="step fade-in"><div class="step-number">2</div><h3>Add Your Stocks</h3><p>Search and add stocks to build your personalized watchlist.</p></div>
+                    <div class="step fade-in"><div class="step-number">3</div><h3>Get AI Insights</h3><p>Receive ML-powered predictions and technical indicators daily.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing -->
+        <section class="section" id="pricing">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <span class="section-label">Pricing</span>
+                    <h2 class="section-title">Simple, Transparent Pricing</h2>
+                    <p class="section-subtitle">Start free and upgrade as you grow</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card glass-card fade-in">
+                        <div class="pricing-tier">Free</div>
+                        <div class="pricing-price">$0<span>/mo</span></div>
+                        <p class="pricing-desc">Perfect for getting started</p>
+                        <ul class="pricing-features">
+                            <li>Track up to 3 stocks</li>
+                            <li>Basic ML predictions</li>
+                            <li>Daily news sentiment</li>
+                            <li>7-day full access trial</li>
+                        </ul>
+                        <a href="#download" class="pricing-btn secondary">Get Started</a>
+                    </div>
+                    <div class="pricing-card glass-card featured fade-in">
+                        <div class="pricing-badge">Popular</div>
+                        <div class="pricing-tier">Standard</div>
+                        <div class="pricing-price">$9.99<span>/mo</span></div>
+                        <p class="pricing-desc">For active investors</p>
+                        <ul class="pricing-features">
+                            <li>Track up to 10 stocks</li>
+                            <li>Advanced ML predictions</li>
+                            <li>Real-time sentiment</li>
+                            <li>Priority support</li>
+                        </ul>
+                        <a href="#download" class="pricing-btn primary">Subscribe</a>
+                    </div>
+                    <div class="pricing-card glass-card fade-in">
+                        <div class="pricing-tier">Pro</div>
+                        <div class="pricing-price">$19.99<span>/mo</span></div>
+                        <p class="pricing-desc">For serious traders</p>
+                        <ul class="pricing-features">
+                            <li>Track up to 30 stocks</li>
+                            <li>Priority predictions</li>
+                            <li>API access</li>
+                            <li>Premium support</li>
+                        </ul>
+                        <a href="#download" class="pricing-btn secondary">Go Pro</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="section" id="about">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <span class="section-label">About Us</span>
+                    <h2 class="section-title">Mitwa Labs</h2>
+                    <p class="section-subtitle">Your Friend, Philosopher & Guide in Financial Markets</p>
+                </div>
+                <div class="about-content fade-in">
+                    <div class="about-grid">
+                        <div class="about-text">
+                            <h3>What is Mitwa?</h3>
+                            <p><strong>Mitwa</strong> means <em>Friend, Philosopher, and Guide</em> — someone who stands by you no matter what. That's exactly who we aspire to be for our users.</p>
+                            <p>At Mitwa Labs, we believe everyone deserves access to institutional-grade market intelligence. Our mission is simple: <strong>help users become financially clever</strong>.</p>
+                            <p>We combine cutting-edge machine learning with intuitive design to demystify the stock market. No jargon, no complexity — just clear, actionable insights explained in plain English.</p>
+                        </div>
+                        <div class="about-info">
+                            <h4>Founded</h4>
+                            <p>January 2025</p>
+                            <h4>Our Mission</h4>
+                            <p>Help users become financially clever</p>
+                            <h4>Headquarters</h4>
+                            <p>Golden City Center<br>Ch. Sambhaji Nagar, India</p>
+                            <h4>Contact</h4>
+                            <p><a href="mailto:MarketSense185@gmail.com">MarketSense185@gmail.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="section" id="download">
+            <div class="container">
+                <div class="cta-card glass-card fade-in">
+                    <h2>Ready to Get Started?</h2>
+                    <p>Download MarketSense today and make data-driven investment decisions.</p>
+                    <a href="#" class="btn btn-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/></svg>
+                        Download for iOS
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Disclaimer -->
         <div class="container">
-            <div class="section-header fade-in">
-                <span class="section-label">Features</span>
-                <h2 class="section-title">Powered by Machine Learning</h2>
-                <p class="section-subtitle">Advanced AI algorithms analyze market patterns to give you insights that matter</p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card glass-card fade-in">
-                    <div class="feature-icon">🤖</div>
-                    <h3>ML Predictions</h3>
-                    <p>Probabilistic price forecasts using ensemble models including XGBoost, LightGBM, and Ridge regression.</p>
-                </div>
-                <div class="feature-card glass-card fade-in">
-                    <div class="feature-icon green">📰</div>
-                    <h3>News Sentiment</h3>
-                    <p>Real-time aggregation from major financial outlets with sentiment scoring and analysis.</p>
-                </div>
-                <div class="feature-card glass-card fade-in">
-                    <div class="feature-icon violet">📊</div>
-                    <h3>Technical Analysis</h3>
-                    <p>RSI, MACD, Moving Averages, and Bollinger Bands — explained in plain English.</p>
-                </div>
-                <div class="feature-card glass-card fade-in">
-                    <div class="feature-icon cyan">⚡</div>
-                    <h3>Real-Time Updates</h3>
-                    <p>Live price updates during market hours with interactive charts and prediction overlays.</p>
-                </div>
-                <div class="feature-card glass-card fade-in">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Confidence Scores</h3>
-                    <p>Every prediction includes confidence intervals and model consensus scores.</p>
-                </div>
-                <div class="feature-card glass-card fade-in">
-                    <div class="feature-icon green">🌙</div>
-                    <h3>Beautiful Design</h3>
-                    <p>Clean SwiftUI interface with dark mode. Swipe through personalized ticker cards.</p>
-                </div>
+            <div class="disclaimer fade-in">
+                <h4>⚠️ Important Disclaimer</h4>
+                <p>MarketSense provides market analysis for informational and educational purposes only. This is NOT investment advice. We do NOT provide buy, sell, or hold recommendations. Past performance does not guarantee future results. Always consult a qualified financial advisor before making investment decisions.</p>
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid fade-in">
-                <div class="stat-item">
-                    <h3>5+</h3>
-                    <p>ML Models</p>
-                </div>
-                <div class="stat-item">
-                    <h3>24/7</h3>
-                    <p>Analysis</p>
-                </div>
-                <div class="stat-item">
-                    <h3>1000+</h3>
-                    <p>Stocks</p>
-                </div>
-                <div class="stat-item">
-                    <h3>Real-time</h3>
-                    <p>Updates</p>
-                </div>
-            </div>
+    <!-- Privacy Policy Page -->
+    <div id="privacy-page" class="hidden">
+        <div class="legal-content">
+            <h1>Privacy Policy</h1>
+            <p class="updated">Last updated: January 2025</p>
+
+            <h2>Information We Collect</h2>
+            <p>We collect information you provide directly: email address, name, and stock preferences. We also collect usage data to improve our services.</p>
+
+            <h2>How We Use Your Information</h2>
+            <ul>
+                <li>To provide and maintain our service</li>
+                <li>To send you predictions and alerts you've requested</li>
+                <li>To improve and personalize your experience</li>
+                <li>To communicate with you about updates</li>
+            </ul>
+
+            <h2>Data Security</h2>
+            <p>We implement industry-standard security measures to protect your personal information. Your data is encrypted in transit and at rest.</p>
+
+            <h2>Data Sharing</h2>
+            <p>We do not sell your personal information. We may share data with service providers who assist in operating our app, subject to confidentiality agreements.</p>
+
+            <h2>Your Rights</h2>
+            <p>You can access, update, or delete your account data at any time through the app settings. Contact us at <a href="mailto:MarketSense185@gmail.com">MarketSense185@gmail.com</a> for assistance.</p>
+
+            <h2>Contact</h2>
+            <p>Mitwa Labs<br>Golden City Center, Ch. Sambhaji Nagar<br>Email: <a href="mailto:MarketSense185@gmail.com">MarketSense185@gmail.com</a></p>
         </div>
-    </section>
+    </div>
 
-    <!-- How It Works -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <div class="section-header fade-in">
-                <span class="section-label">How It Works</span>
-                <h2 class="section-title">Three Simple Steps</h2>
-                <p class="section-subtitle">Get started with AI-powered market insights in minutes</p>
-            </div>
+    <!-- Terms of Service Page -->
+    <div id="terms-page" class="hidden">
+        <div class="legal-content">
+            <h1>Terms of Service</h1>
+            <p class="updated">Last updated: January 2025</p>
 
-            <div class="steps-grid">
-                <div class="step fade-in">
-                    <div class="step-number">1</div>
-                    <h3>Download the App</h3>
-                    <p>Get MarketSense from the App Store and create your free account.</p>
-                </div>
-                <div class="step fade-in">
-                    <div class="step-number">2</div>
-                    <h3>Add Your Stocks</h3>
-                    <p>Search and add stocks to build your personalized watchlist.</p>
-                </div>
-                <div class="step fade-in">
-                    <div class="step-number">3</div>
-                    <h3>Get AI Insights</h3>
-                    <p>Receive ML-powered predictions and technical indicators daily.</p>
-                </div>
-            </div>
+            <h2>Acceptance of Terms</h2>
+            <p>By accessing MarketSense, you agree to these Terms of Service. If you disagree, please do not use the app.</p>
+
+            <h2>Service Description</h2>
+            <p>MarketSense provides ML-powered stock analysis for educational purposes. Our predictions are probabilistic forecasts, not investment recommendations.</p>
+
+            <h2>User Responsibilities</h2>
+            <ul>
+                <li>You must be 18 years or older to use this service</li>
+                <li>You are responsible for maintaining account security</li>
+                <li>You agree not to misuse or redistribute our data</li>
+                <li>You understand this is not financial advice</li>
+            </ul>
+
+            <h2>Subscription & Payments</h2>
+            <p>Paid subscriptions are billed through Apple App Store. Cancellations take effect at the end of the current billing period. Refunds are subject to Apple's policies.</p>
+
+            <h2>Limitation of Liability</h2>
+            <p>MarketSense and Mitwa Labs are not liable for investment decisions made based on our analysis. Use our service at your own risk.</p>
+
+            <h2>Modifications</h2>
+            <p>We reserve the right to modify these terms. Continued use after changes constitutes acceptance.</p>
+
+            <h2>Contact</h2>
+            <p>Email: <a href="mailto:MarketSense185@gmail.com">MarketSense185@gmail.com</a></p>
         </div>
-    </section>
+    </div>
 
-    <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <div class="section-header fade-in">
-                <span class="section-label">Pricing</span>
-                <h2 class="section-title">Simple, Transparent Pricing</h2>
-                <p class="section-subtitle">Start free and upgrade as you grow</p>
-            </div>
+    <!-- Disclaimer Page -->
+    <div id="disclaimer-page" class="hidden">
+        <div class="legal-content">
+            <h1>Disclaimer</h1>
+            <p class="updated">Last updated: January 2025</p>
 
-            <div class="pricing-grid">
-                <div class="pricing-card glass-card fade-in">
-                    <div class="pricing-tier">Free</div>
-                    <div class="pricing-price">$0<span>/mo</span></div>
-                    <p class="pricing-desc">Perfect for getting started</p>
-                    <ul class="pricing-features">
-                        <li>Track up to 3 stocks</li>
-                        <li>Basic ML predictions</li>
-                        <li>Daily news sentiment</li>
-                        <li>7-day full access trial</li>
-                    </ul>
-                    <a href="#download" class="pricing-btn secondary">Get Started</a>
-                </div>
+            <h2>Not Investment Advice</h2>
+            <p>MarketSense provides market analysis and probabilistic forecasting for <strong>informational and educational purposes only</strong>. Nothing in this app constitutes investment advice, financial advice, trading advice, or any other form of advice.</p>
 
-                <div class="pricing-card glass-card featured fade-in">
-                    <div class="pricing-tier">Standard</div>
-                    <div class="pricing-price">$9.99<span>/mo</span></div>
-                    <p class="pricing-desc">For active investors</p>
-                    <ul class="pricing-features">
-                        <li>Track up to 10 stocks</li>
-                        <li>Advanced ML predictions</li>
-                        <li>Real-time sentiment</li>
-                        <li>Priority support</li>
-                    </ul>
-                    <a href="#download" class="pricing-btn primary">Subscribe</a>
-                </div>
+            <h2>No Recommendations</h2>
+            <p>We do NOT provide buy, sell, or hold recommendations. All predictions are statistical probabilities generated by machine learning models and should not be interpreted as certainties.</p>
 
-                <div class="pricing-card glass-card fade-in">
-                    <div class="pricing-tier">Pro</div>
-                    <div class="pricing-price">$19.99<span>/mo</span></div>
-                    <p class="pricing-desc">For serious traders</p>
-                    <ul class="pricing-features">
-                        <li>Track up to 30 stocks</li>
-                        <li>Priority predictions</li>
-                        <li>API access</li>
-                        <li>Premium support</li>
-                    </ul>
-                    <a href="#download" class="pricing-btn secondary">Go Pro</a>
-                </div>
-            </div>
-        </div>
-    </section>
+            <h2>Risk Warning</h2>
+            <p>Investing in stocks involves substantial risk of loss. Past performance does not guarantee future results. You should:</p>
+            <ul>
+                <li>Only invest money you can afford to lose</li>
+                <li>Consult a qualified financial advisor</li>
+                <li>Conduct your own research</li>
+                <li>Understand that ML predictions can be wrong</li>
+            </ul>
 
-    <!-- CTA Section -->
-    <section class="cta" id="download">
-        <div class="container">
-            <div class="cta-card glass-card fade-in">
-                <h2>Ready to Get Started?</h2>
-                <p>Download MarketSense today and make data-driven investment decisions.</p>
-                <a href="#" class="btn btn-primary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 22C7.79 22.05 6.8 20.68 5.96 19.47C4.25 17 2.94 12.45 4.7 9.39C5.57 7.87 7.13 6.91 8.82 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
-                    </svg>
-                    Download for iOS
-                </a>
-            </div>
-        </div>
-    </section>
+            <h2>Accuracy</h2>
+            <p>While we strive for accuracy, we make no guarantees about the completeness, reliability, or accuracy of our analysis. Market data may be delayed.</p>
 
-    <!-- Disclaimer -->
-    <div class="container">
-        <div class="disclaimer fade-in">
-            <h4>⚠️ Important Disclaimer</h4>
-            <p>MarketSense provides market analysis for informational and educational purposes only. This is NOT investment advice. We do NOT provide buy, sell, or hold recommendations. Past performance does not guarantee future results. Always consult a qualified financial advisor before making investment decisions.</p>
+            <h2>Limitation of Liability</h2>
+            <p>Mitwa Labs and MarketSense shall not be held liable for any losses, damages, or consequences arising from the use of our service or reliance on our analysis.</p>
+
+            <h2>Contact</h2>
+            <p>Questions? Email us at <a href="mailto:MarketSense185@gmail.com">MarketSense185@gmail.com</a></p>
         </div>
     </div>
 
@@ -1284,14 +626,14 @@
         <div class="footer-content">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#" class="logo">
+                    <a href="#" class="logo" onclick="showPage('home')">
                         <div class="logo-icon">📈</div>
                         <div class="logo-text">
                             <span class="logo-brand">MarketSense</span>
                             <span class="logo-company">by Mitwa Labs</span>
                         </div>
                     </a>
-                    <p>ML-powered stock insights for smarter investment decisions. Built with care by Mitwa Labs.</p>
+                    <p>ML-powered stock insights for smarter investment decisions. Built with care by Mitwa Labs — your friend, philosopher & guide.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Product</h4>
@@ -1301,22 +643,20 @@
                 </div>
                 <div class="footer-links">
                     <h4>Company</h4>
-                    <a href="#">About Mitwa Labs</a>
-                    <a href="#">Careers</a>
-                    <a href="#">Contact</a>
+                    <a href="#about">About Mitwa Labs</a>
+                    <a href="mailto:MarketSense185@gmail.com">Contact</a>
                 </div>
                 <div class="footer-links">
                     <h4>Legal</h4>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Disclaimer</a>
+                    <a href="#" onclick="showPage('privacy'); return false;">Privacy Policy</a>
+                    <a href="#" onclick="showPage('terms'); return false;">Terms of Service</a>
+                    <a href="#" onclick="showPage('disclaimer'); return false;">Disclaimer</a>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 Mitwa Labs. All rights reserved.</p>
                 <div class="footer-social">
-                    <a href="#" aria-label="Twitter">𝕏</a>
-                    <a href="#" aria-label="LinkedIn">in</a>
+                    <a href="mailto:MarketSense185@gmail.com" aria-label="Email">✉</a>
                 </div>
             </div>
         </div>
@@ -1326,24 +666,34 @@
         // Intersection Observer for fade-in animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const href = this.getAttribute('href');
+                if (href.length > 1) {
+                    e.preventDefault();
+                    showPage('home');
+                    setTimeout(() => {
+                        const target = document.querySelector(href);
+                        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
                 }
             });
         });
+
+        // Page navigation
+        function showPage(page) {
+            document.getElementById('home-page').classList.toggle('hidden', page !== 'home');
+            document.getElementById('privacy-page').classList.toggle('hidden', page !== 'privacy');
+            document.getElementById('terms-page').classList.toggle('hidden', page !== 'terms');
+            document.getElementById('disclaimer-page').classList.toggle('hidden', page !== 'disclaimer');
+            if (page !== 'home') window.scrollTo(0, 0);
+        }
     </script>
 </body>
 </html>
